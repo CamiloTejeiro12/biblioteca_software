@@ -4,43 +4,45 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
+import java.util.List;
+import java.util.ArrayList;
+import com.bilioteca.biblioteca.Usuario;
 
 public class Biblioteca {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        Connection conexion = ConexionBDUtil.obtenerConexion();
-        try {
-            String consultaSQL = "SELECT usuario.id, usuario.nombre_usuario, usuario.\"contraseña\", persona.nombre, persona.direccion " +
-                                 "FROM usuario " +
-                                 "JOIN persona ON usuario.persona = persona.cedula";
-            PreparedStatement statement = conexion.prepareStatement(consultaSQL);
+        // Crear un nuevo usuario
+        Usuario nuevoUsuario = new Usuario("1234567890", "John Doe", "123 Main St", "johndoe", "secreto");
+        nuevoUsuario.crearUsuario();
 
-            // Ejecutar la consulta y obtener el conjunto de resultados
-            ResultSet resultSet = statement.executeQuery();
-
-            // Procesar y mostrar los resultados
-            while (resultSet.next()) {
-                String idUsuario = resultSet.getString("id");
-                String nombreUsuario = resultSet.getString("nombre_usuario");
-                String contraseña = resultSet.getString("contraseña");
-                String nombrePersona = resultSet.getString("nombre");
-                String direccionPersona = resultSet.getString("direccion");
-
-                System.out.println("ID de Usuario: " + idUsuario);
-                System.out.println("Nombre de Usuario: " + nombreUsuario);
-                System.out.println("Contraseña: " + contraseña);
-                System.out.println("Nombre de Persona: " + nombrePersona);
-                System.out.println("Dirección de Persona: " + direccionPersona);
-                System.out.println("---------------------------");
-            }
-
-            // Cerrar el ResultSet, el PreparedStatement y la conexión cuando hayas terminado
-            resultSet.close();
-            statement.close();
-            conexion.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
+        // Listar todos los usuarios
+        List<Usuario> usuarios = Usuario.listarUsuarios();
+        for (Usuario usuario : usuarios) {
+            System.out.println("Cedula: " + usuario.getCedula());
+            System.out.println("Nombre de Usuario: " + usuario.getNombreUsuario());
+            System.out.println("Contraseña: " + usuario.getPassword());
+            System.out.println();
         }
+
+        // Actualizar un usuario (asumiendo que existe en la base de datos)
+        Usuario usuarioExistente = usuarios.get(0); // Obtener el primer usuario de la lista
+        usuarioExistente.setNombreUsuario("nuevoUsuario");
+        usuarioExistente.setPassword("nuevaContraseña");
+        usuarioExistente.actualizarUsuario();
+
+        // Eliminar un usuario (asumiendo que existe en la base de datos)
+        Usuario usuarioAEliminar = usuarios.get(1); // Obtener el segundo usuario de la lista
+        usuarioAEliminar.eliminarUsuario();
+
+        // Volver a listar usuarios después de eliminar uno
+        usuarios = Usuario.listarUsuarios();
+        for (Usuario usuario : usuarios) {
+            System.out.println("Cedula: " + usuario.getCedula());
+            System.out.println("Nombre de Usuario: " + usuario.getNombreUsuario());
+            System.out.println("Contraseña: " + usuario.getPassword());
+            System.out.println();
+        }
+
+        
     }
 }

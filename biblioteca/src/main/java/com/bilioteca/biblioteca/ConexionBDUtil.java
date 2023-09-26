@@ -33,6 +33,7 @@ public class ConexionBDUtil {
         if (conexion != null) {
             try {
                 conexion.close();
+                conexion = null;
             } catch (SQLException e) {
                 e.printStackTrace();
             }
