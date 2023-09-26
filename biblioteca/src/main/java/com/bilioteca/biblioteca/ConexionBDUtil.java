@@ -16,8 +16,8 @@ public class ConexionBDUtil {
     public static Connection obtenerConexion() {
         if (conexion == null) {
             String url = "jdbc:postgresql://localhost:5432/biblioteca";
-            String usuario = "jhon";
-            String contraseña = "123456";
+            String usuario = "postgres";
+            String contraseña = "postgres";
 
             try {
                 conexion = DriverManager.getConnection(url, usuario, contraseña);
