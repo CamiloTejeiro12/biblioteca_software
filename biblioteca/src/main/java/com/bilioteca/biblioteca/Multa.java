@@ -10,6 +10,8 @@ package com.bilioteca.biblioteca;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 
 public class Multa {
 
@@ -17,24 +19,24 @@ public class Multa {
     private static List<Multa> multas = new ArrayList<>();
 
     // Atributos de la clase
-    private int id;
+    private UUID id;
     private float monto;
     private String descripcion;
     private String fechaVencimiento;
 
     // Constructor
-    public Multa(int id, float monto, String descripcion, String fechaVencimiento) {
+    public Multa(UUID id, float monto, String descripcion, String fechaVencimiento) {
         this.id = id;
         this.monto = monto;
         this.descripcion = descripcion;
         this.fechaVencimiento = fechaVencimiento;
     }
     
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -68,7 +70,7 @@ public class Multa {
     }
 
     // Método para consultar una multa por su ID
-    public Multa consultarMultaPorId(int id) {
+    public Multa consultarMultaPorId(UUID id) {
         for (Multa multa : multas) {
             if (multa.id == id) {
                 return multa;

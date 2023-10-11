@@ -10,6 +10,8 @@ package com.bilioteca.biblioteca;
  */
 import java.util.ArrayList;
 import java.util.List;
+import java.util.UUID;
+
 
 public class Categoria {
 
@@ -17,20 +19,20 @@ public class Categoria {
     private static List<Categoria> categorias = new ArrayList<>();
 
     // Atributos de la clase
-    private int id;
+    private UUID id;
     private String descripcion;
 
     // Constructor
-    public Categoria(int id, String descripcion) {
+    public Categoria(UUID id, String descripcion) {
         this.id = id;
         this.descripcion = descripcion;
     }
 
-    public int getId() {
+    public UUID getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(UUID id) {
         this.id = id;
     }
 
@@ -47,7 +49,7 @@ public class Categoria {
     }
 
     // Método para consultar una categoría por su ID
-    public Categoria consultarCategoriaPorId(int id) {
+    public Categoria consultarCategoriaPorId(UUID id) {
         for (Categoria categoria : categorias) {
             if (categoria.id == id) {
                 return categoria;
