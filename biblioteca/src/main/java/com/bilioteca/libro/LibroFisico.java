@@ -10,10 +10,16 @@ package com.bilioteca.libro;
  */
 import java.util.UUID;
 
-public class LibroFisico implements InterfaceLibroFisico {
+import java.util.UUID;
+
+
+public class LibroFisico implements InterfaceLibroFisico, InterfaceLibro {
     private UUID id;
     private String ubicacion;
     private String estado;
+
+    private InterfaceLibro libro;
+
 
     public LibroFisico(UUID id, String ubicacion, String estado) {
         this.id = id;
@@ -21,13 +27,10 @@ public class LibroFisico implements InterfaceLibroFisico {
         this.estado = estado;
     }
 
-    @Override
-    public UUID getId() {
-        return id;
-    }
-    
-    public void setId(UUID id) {
-        this.id = id;
+   
+    // Métodos específicos para libros físicos
+    public void organizando() {
+        System.out.println("Ubicando un libro físico con ID: " + ubicacion);
     }
 
     @Override
@@ -35,22 +38,63 @@ public class LibroFisico implements InterfaceLibroFisico {
         return ubicacion;
     }
 
-    public void setUbicacion(String ubicacion) {
-        this.ubicacion = ubicacion;
+    @Override
+    public UUID getId() {
+        return id;
+    }
+
+    @Override
+    public String getTitulo() {
+        return this.libro.getTitulo();
+    }
+
+    @Override
+    public String getReview() {
+        return this.libro.getReview();
+    }
+
+    @Override
+    public String getDisponible() {
+        return this.libro.getDisponible();
+    }
+
+    @Override
+    public int getCopiasTotales() {
+        return this.libro.getCopiasTotales();
+    }
+
+    @Override
+    public String getIsbn() {
+        return this.libro.getIsbn();
+    }
+
+    @Override
+    public String getAutor() {
+        return this.libro.getAutor();
+    }
+
+    @Override
+    public LibroVirtual getLibroVirtual() {
+        return this.libro.getLibroVirtual();
+    }
+
+    @Override
+    public LibroFisico getLibroFisico() {
+        return this.libro.getLibroFisico();
+    }
+
+    @Override
+    public Editorial getEditorial() {
+        return this.libro.getEditorial();
+    }
+
+    @Override
+    public Categoria getCategoria() {
+        return this.libro.getCategoria();
     }
 
     @Override
     public String getEstado() {
         return estado;
-    }
-
-    public void setEstado(String estado) {
-        this.estado = estado;
-    }
-
-    // Métodos específicos para libros físicos
-    public void reparar() {
-        // Implementación para reparar un libro físico
-        System.out.println("Reparando libro físico con ID: " + id);
     }
 }

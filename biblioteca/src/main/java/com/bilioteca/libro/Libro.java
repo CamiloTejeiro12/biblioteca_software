@@ -12,7 +12,7 @@ import java.util.UUID;
  */
 import java.util.UUID;
 
-public class Libro implements InterfaceLibro {
+public class Libro implements InterfaceLibro, LibroCategoria, LibroEditorial {
     private UUID id;
     private String titulo;
     private String review;
@@ -40,6 +40,16 @@ public class Libro implements InterfaceLibro {
         this.categoria = categoria;
     }
 
+    
+    @Override
+    public void asignarCategoria(Categoria categoria) {
+        this.categoria = categoria;
+    }
+
+    @Override
+    public void asignarEditorial(Editorial editorial) {
+        this.editorial = editorial;
+    }
     
     public Libro(LibroVirtual libroVirtual) {
         this.libroVirtual = libroVirtual;
@@ -132,17 +142,9 @@ public class Libro implements InterfaceLibro {
         return editorial;
     }
 
-    public void setEditorial(Editorial editorial) {
-        this.editorial = editorial;
-    }
-
-    
     @Override
     public Categoria getCategoria() {
         return categoria;
     }
 
-    public void setCategoria(Categoria categoria) {
-        this.categoria = categoria;
-    }
 }
