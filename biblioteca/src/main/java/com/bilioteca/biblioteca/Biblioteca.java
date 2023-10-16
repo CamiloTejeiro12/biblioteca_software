@@ -1,44 +1,36 @@
 package com.bilioteca.biblioteca;
 
 import java.sql.Connection;
-import java.sql.PreparedStatement;
+import java.sql.DriverManager;
 import java.sql.SQLException;
-import java.sql.ResultSet;
+import java.util.UUID;
 
 public class Biblioteca {
 
     public static void main(String[] args) {
-        System.out.println("Hello World!");
-        Connection conexion = ConexionBDUtil.obtenerConexion();
-        try {
-            String consultaSQL = "SELECT usuario.id, usuario.nombre_usuario, usuario.\"contraseña\", persona.nombre, persona.direccion " +
-                                 "FROM usuario " +
-                                 "JOIN persona ON usuario.persona = persona.cedula";
-            PreparedStatement statement = conexion.prepareStatement(consultaSQL);
+        // Configurar la conexión a la base de datos PostgreSQL
+        String jdbcUrl = "jdbc:postgresql://localhost:5432/biblioteca";
+        String username = "jhon";
+        String password = "123456";
 
-            // Ejecutar la consulta y obtener el conjunto de resultados
-            ResultSet resultSet = statement.executeQuery();
+        try (Connection connection = DriverManager.getConnection(jdbcUrl, username, password)) {
+            // Crear repositorios
+            PersonaRepository personaRepository = new PostgreSQLUsuarioRepository(connection);
+            UsuarioRepository usuarioRepository = new PostgreSQLUsuarioRepository(connection);
 
-            // Procesar y mostrar los resultados
-            while (resultSet.next()) {
-                String idUsuario = resultSet.getString("id");
-                String nombreUsuario = resultSet.getString("nombre_usuario");
-                String contraseña = resultSet.getString("contraseña");
-                String nombrePersona = resultSet.getString("nombre");
-                String direccionPersona = resultSet.getString("direccion");
+            // Buscar una persona por cédula
+            Persona personaEncontrada = personaRepository.buscarPersonaPorCedula("123456");
+            System.out.println("Persona encontrada: " + personaEncontrada.getNombre());
 
-                System.out.println("ID de Usuario: " + idUsuario);
-                System.out.println("Nombre de Usuario: " + nombreUsuario);
-                System.out.println("Contraseña: " + contraseña);
-                System.out.println("Nombre de Persona: " + nombrePersona);
-                System.out.println("Dirección de Persona: " + direccionPersona);
-                System.out.println("---------------------------");
-            }
-
-            // Cerrar el ResultSet, el PreparedStatement y la conexión cuando hayas terminado
-            resultSet.close();
-            statement.close();
-            conexion.close();
+            // Buscar un usuario por cédula
+            Usuario usuarioEncontrado = usuarioRepository.buscarUsuarioPorCedula("555555555");
+            System.out.println("Usuario encontrado: " + usuarioEncontrado.getNombreUsuario());
+            
+            // Crear un usuario
+            Usuario nuevoUsuario = new Usuario("123456", "Juan Pérez", "Calle 123", "Juan Pérez", "Contraseña123");
+            usuarioRepository.crearUsuario(nuevoUsuario);
+            
+           
         } catch (SQLException e) {
             e.printStackTrace();
         }
