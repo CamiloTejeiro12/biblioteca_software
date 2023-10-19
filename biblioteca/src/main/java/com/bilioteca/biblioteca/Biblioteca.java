@@ -10,6 +10,9 @@ import java.util.List;
 import java.sql.SQLException;
 import java.sql.Connection;
 import conexioDataBase.ConexionBD;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
 
 public class Biblioteca {
 
@@ -45,6 +48,23 @@ public class Biblioteca {
                 for (Persona persona : personas) {
                     System.out.println(persona);
                 }
+                
+                
+                // Utiliza una consulta SQL estándar para obtener la fecha y hora actual
+                String consulta = "SELECT CURRENT_TIMESTAMP as fecha_actual";
+
+                // Crea una sentencia preparada
+                PreparedStatement stmt = conexion.prepareStatement(consulta);
+
+                // Ejecuta la consulta
+                ResultSet resultado = stmt.executeQuery();
+
+                // Lee el resultado
+                if (resultado.next()) {
+                    String fechaActual = resultado.getString("fecha_actual");
+                    System.out.println("Fecha y hora actual de la base de datos: " + fechaActual);
+                }
+
 
             } catch (SQLException | InstantiationException | IllegalAccessException e) {
                 e.printStackTrace();
