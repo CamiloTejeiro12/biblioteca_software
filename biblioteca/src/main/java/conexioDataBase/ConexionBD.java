@@ -8,9 +8,17 @@ import java.util.Properties;
 
 public class ConexionBD {
     private Connection conexion;
+    private static ConexionBD instancia;
 
-    public ConexionBD() {
-        // Constructor vacío
+    private ConexionBD() {
+        // Constructor privado para evitar la creación de instancias desde fuera de la clase
+    }
+
+    public static ConexionBD obtenerInstancia() {
+        if (instancia == null) {
+            instancia = new ConexionBD();
+        }
+        return instancia;
     }
 
     public Connection conectar() {

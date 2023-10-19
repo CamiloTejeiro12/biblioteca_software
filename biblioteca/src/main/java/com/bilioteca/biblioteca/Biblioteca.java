@@ -6,15 +6,18 @@ import conexioDataBase.ConexionBD;
 public class Biblioteca {
 
     public static void main(String[] args) {
-        ConexionBD conexionBD = new ConexionBD();
-        
-        // Obtener una conexión
+        ConexionBD conexionBD = ConexionBD.obtenerInstancia();
         Connection conexion = conexionBD.conectar();
-        
-        // Verificar si la conexión es nula (hubo un problema)
-        if (conexion == null) {
-            System.out.println("No se pudo establecer la conexión.");
-            return; // Puedes manejar el error según tus necesidades
+
+        if (conexion != null) {
+            // Realiza operaciones en la base de datos
+            // Por ejemplo, ejecuta consultas SQL o realiza inserciones/actualizaciones
+            // No olvides manejar excepciones en caso de errores SQL
+
+            // Cierra la conexión cuando hayas terminado
+            conexionBD.desconectar();
+        } else {
+            System.err.println("No se pudo conectar a la base de datos.");
         }
     }
 }
