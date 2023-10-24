@@ -1,7 +1,5 @@
 package reportGraphics;
 
-import observer.Observer;
-
 
 public class ReportGraphics implements Observer {
     @Override
