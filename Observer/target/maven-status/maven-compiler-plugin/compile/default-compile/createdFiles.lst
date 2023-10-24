@@ -1,0 +1,8 @@
+dataSource/DataSource.class
+sensor/Sensor.class
+observer/Observer.class
+observable/Observable.class
+reportConsole/ReportConsole.class
+main/Main.class
+tableReport/TableReport.class
+reportGraphics/ReportGraphics.class
