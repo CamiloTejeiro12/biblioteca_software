@@ -7,5 +7,5 @@ public interface Observable {
     
     void deleteObserver(Observer o);
     
-    void notifyObservers();  
+    void notifyObservers(String nameSensor, double co2, double no2, double opacimetro, double anemotro, double luxometro);  
 }

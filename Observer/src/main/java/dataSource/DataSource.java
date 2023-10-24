@@ -20,10 +20,13 @@ public class DataSource implements Observable{
     }
      
     @Override
-    public void notifyObservers(){
+    public void notifyObservers(String nameSensor, double co2, double no2, double opacimetro, double anemotro, double luxometro){
         for(Observer observer: observerSet){
-            observer.update();
+            observer.update(nameSensor,co2,no2,opacimetro,anemotro,luxometro);
         }
+    }
+    public void receiveSensorData(String nameSensor, double co2, double no2, double opacimetro, double anemotro, double luxometro){
+        notifyObservers(nameSensor,co2,no2,opacimetro,anemotro,luxometro);
     }
     
 }
