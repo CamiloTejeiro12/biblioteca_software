@@ -1,0 +1,8 @@
+conexioDataBase/ConexionBD.class
+com/bilioteca/biblioteca/Biblioteca.class
+com/biblioteca/CRUD/GenericDAO.class
+com/biblioteca/usuario/UsuarioInterface.class
+com/biblioteca/usuario/Usuario.class
+com/biblioteca/persona/PersonaDAO.class
+com/biblioteca/persona/Persona.class
+com/biblioteca/persona/PersonaInterface.class
