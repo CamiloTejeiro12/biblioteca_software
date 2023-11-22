@@ -1,25 +1,23 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Class.java to edit this template
- */
 package com.biblioteca.usuario;
+
+import com.biblioteca.CRUD.GenericDAO;
 
 /**
  *
  * @author tejei
  */
-import java.util.UUID;
-
 public class Usuario implements UsuarioInterface {
-    private UUID id;
+    @GenericDAO.Id
+    private String id;
     private String nombre_usuario;
     private String password;
-    private String persona;  // Nueva propiedad
+    private String persona;
 
     public Usuario() {
-        this.id = UUID.randomUUID();
+        // Utilizando generador UUID y almacenando como String
+        this.id = java.util.UUID.randomUUID().toString();
     }
-    
+
     @Override
     public String getPersona() {
         return persona;
@@ -31,7 +29,7 @@ public class Usuario implements UsuarioInterface {
     }
 
     @Override
-    public UUID getId() {
+    public String getId() {
         return id;
     }
 

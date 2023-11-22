@@ -1,17 +1,11 @@
-/*
- * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/Classes/Interface.java to edit this template
- */
 package com.biblioteca.usuario;
 
 /**
  *
  * @author tejei
  */
-import java.util.UUID;
-
 public interface UsuarioInterface {
-    UUID getId();
+    String getId(); // Cambiado de UUID a String
     String getNombreUsuario();
     void setNombreUsuario(String nombre_usuario);
     String getPassword();
